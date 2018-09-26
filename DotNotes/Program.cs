@@ -73,5 +73,14 @@ namespace DotNotes
         public string Password { get => password; set => password = value; }
         public DateTime Dob { get => dob; set => dob = value; }
         internal UserType Type { get => type; set => type = value; }
+
+        public User(string username, string hashedPassword, string password, DateTime dob, UserType type)
+        {
+            this.username = username ?? throw new ArgumentNullException(nameof(username));
+            this.hashedPassword = hashedPassword ?? throw new ArgumentNullException(nameof(hashedPassword));
+            this.password = password ?? throw new ArgumentNullException(nameof(password));
+            this.dob = dob;
+            this.type = type;
+        }
     }
 }

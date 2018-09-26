@@ -34,7 +34,20 @@ namespace DotNotes
 
         private void newUserButton_Click(object sender, EventArgs e)
         {
+            // transion to Sign up
+            var su = new SignUpForm
+            {
+                Location = this.Location
+            };
 
+            this.Hide();
+
+            su.Show();
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

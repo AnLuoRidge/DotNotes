@@ -16,5 +16,18 @@ namespace DotNotes
         {
             InitializeComponent();
         }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // transion to Login
+            var lf = new LoginForm
+            {
+                Location = this.Location
+            };
+
+            this.Hide();
+
+            lf.Show();
+        }
     }
 }
