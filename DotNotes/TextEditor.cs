@@ -29,5 +29,18 @@ namespace DotNotes
 
             lf.Show();
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // transion to About
+            var about = new About
+            {
+                Location = this.Location
+            };
+
+            this.Hide();
+            // TODO: make it as a modal
+            about.Show();
+        }
     }
 }
