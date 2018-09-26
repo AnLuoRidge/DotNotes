@@ -22,6 +22,14 @@ namespace DotNotes
             Console.WriteLine(usernameTextBox.Text);
             Console.WriteLine(passwordTextBox.Text);
             // transion to Editor
+            var te = new TextEditor
+            {
+                Location = this.Location
+            };
+
+            this.Hide();
+
+            te.Show();
         }
 
         private void newUserButton_Click(object sender, EventArgs e)

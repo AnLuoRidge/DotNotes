@@ -83,9 +83,9 @@ namespace DotNotes.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap copy1 {
+        internal static System.Drawing.Bitmap copy {
             get {
-                object obj = ResourceManager.GetObject("copy1", resourceCulture);
+                object obj = ResourceManager.GetObject("copy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -145,7 +145,7 @@ namespace DotNotes.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap save_as {
             get {
-                object obj = ResourceManager.GetObject("save-as", resourceCulture);
+                object obj = ResourceManager.GetObject("save_as", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
