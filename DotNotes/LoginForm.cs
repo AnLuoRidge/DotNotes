@@ -16,5 +16,17 @@ namespace DotNotes
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(usernameTextBox.Text);
+            Console.WriteLine(passwordTextBox.Text);
+            // transion to Editor
+        }
+
+        private void newUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
