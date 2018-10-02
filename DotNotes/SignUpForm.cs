@@ -15,6 +15,8 @@ namespace DotNotes
         public SignUpForm()
         {
             InitializeComponent();
+            this.CenterToScreen();
+
             // userTypecomboBox.Items.Add("View");
             // userTypecomboBox.Items.Add("Edit");
         }

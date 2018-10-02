@@ -56,9 +56,10 @@ namespace DotNotes
         }
     }
 
-    enum UserType
+    public enum UserType
     {
-
+        View,
+        Edit
     }
     class User
     {

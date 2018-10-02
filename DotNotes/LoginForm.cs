@@ -15,30 +15,27 @@ namespace DotNotes
         public LoginForm()
         {
             InitializeComponent();
+            this.CenterToScreen();
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void loginButton_Click(object sender, EventArgs e)
         {
             Console.WriteLine(usernameTextBox.Text);
             Console.WriteLine(passwordTextBox.Text);
             // transion to Editor
-            var te = new TextEditor
-            {
-                Location = this.Location
-            };
+            // UserType type 
+            var te = new TextEditor(UserType.Edit);
 
             this.Hide();
-
+            
             te.Show();
         }
 
         private void newUserButton_Click(object sender, EventArgs e)
         {
             // transion to Sign up
-            var su = new SignUpForm
-            {
-                Location = this.Location
-            };
+            var su = new SignUpForm();
 
             this.Hide();
 
