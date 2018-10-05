@@ -290,7 +290,7 @@
             this.fontSizeToolStripComboBox.Name = "fontSizeToolStripComboBox";
             this.fontSizeToolStripComboBox.Size = new System.Drawing.Size(121, 25);
             this.fontSizeToolStripComboBox.ToolTipText = "Font Size";
-            this.fontSizeToolStripComboBox.Click += new System.EventHandler(this.fontSizeToolStripComboBox_Click);
+            this.fontSizeToolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.fontSizeToolStripComboBox_Click);
             // 
             // toolStripSeparator2
             // 

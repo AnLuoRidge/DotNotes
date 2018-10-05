@@ -19,6 +19,7 @@ namespace DotNotes
             InitializeComponent();
             this.CenterToScreen();
             this.userType = type;
+            editorRichTextBox.Text = "test new style";
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -52,18 +53,8 @@ namespace DotNotes
             if (editorRichTextBox.SelectionFont != null)
             {
                 System.Drawing.Font currentFont = editorRichTextBox.SelectionFont;
-                System.Drawing.FontStyle newFontStyle;
-
-                if (editorRichTextBox.SelectionFont.Bold == true)
-                {
-                    newFontStyle = (~FontStyle.Bold) & editorRichTextBox.SelectionFont.Style;
-                }
-                else
-                {
-                    newFontStyle = editorRichTextBox.SelectionFont.Style | FontStyle.Bold;
-                }
-
-                editorRichTextBox.SelectionFont = new Font(Font, newFontStyle);
+                System.Drawing.FontStyle newFontStyle = editorRichTextBox.SelectionFont.Style ^ FontStyle.Bold;
+                editorRichTextBox.SelectionFont = new Font(currentFont, newFontStyle);
             }
         }
 
@@ -74,16 +65,8 @@ namespace DotNotes
                 System.Drawing.Font currentFont = editorRichTextBox.SelectionFont;
                 System.Drawing.FontStyle newFontStyle;
 
-                if (editorRichTextBox.SelectionFont.Italic == true)
-                {
-                    newFontStyle = (~FontStyle.Italic) & editorRichTextBox.SelectionFont.Style;
-                }
-                else
-                {
-                    newFontStyle = editorRichTextBox.SelectionFont.Style | FontStyle.Italic;
-                }
-
-                editorRichTextBox.SelectionFont = new Font(Font, newFontStyle);
+                newFontStyle = editorRichTextBox.SelectionFont.Style ^ FontStyle.Italic;
+                editorRichTextBox.SelectionFont = new Font(currentFont, newFontStyle);
             }
         }
 
@@ -94,31 +77,22 @@ namespace DotNotes
                 System.Drawing.Font currentFont = editorRichTextBox.SelectionFont;
                 System.Drawing.FontStyle newFontStyle;
 
-                if (editorRichTextBox.SelectionFont.Underline == true)
-                {
-                    newFontStyle = (~FontStyle.Underline) & editorRichTextBox.SelectionFont.Style;
-                }
-                else
-                {
-                    newFontStyle = editorRichTextBox.SelectionFont.Style | FontStyle.Underline;
-                }
+                newFontStyle = editorRichTextBox.SelectionFont.Style ^ FontStyle.Underline;
 
-                editorRichTextBox.SelectionFont = new Font(Font, newFontStyle);
+                editorRichTextBox.SelectionFont = new Font(currentFont, newFontStyle);
             }
         }
 
         // this should be selectedItem changed NOT comboBox clicked
         private void fontSizeToolStripComboBox_Click(object sender, EventArgs e)
         {
-            string fontName = editorRichTextBox.SelectionFont.Name;
+            var oldFontFamily = editorRichTextBox.SelectionFont.FontFamily;
+            var oldFontStyle = editorRichTextBox.SelectionFont.Style;
+            var selectedFontSize = (string) fontSizeToolStripComboBox.SelectedItem;
 
-            switch (fontSizeToolStripComboBox.SelectedItem)
+            if (selectedFontSize != "")
             {
-                case "8":
-                    editorRichTextBox.SelectionFont = new Font(fontName, 20);
-                    break;
-                default:
-                    break;
+                editorRichTextBox.SelectionFont = new Font(oldFontFamily, int.Parse(selectedFontSize), oldFontStyle);
             }
         }
     }
