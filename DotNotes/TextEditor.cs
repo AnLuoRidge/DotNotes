@@ -53,7 +53,16 @@ namespace DotNotes
             if (editorRichTextBox.SelectionFont != null)
             {
                 System.Drawing.Font currentFont = editorRichTextBox.SelectionFont;
-                System.Drawing.FontStyle newFontStyle = editorRichTextBox.SelectionFont.Style ^ FontStyle.Bold;
+                System.Drawing.FontStyle newFontStyle;
+
+                if (editorRichTextBox.SelectionFont.Bold == true)
+                {
+                    newFontStyle = (~FontStyle.Bold) & editorRichTextBox.SelectionFont.Style;
+                }
+                else
+                {
+                    newFontStyle = editorRichTextBox.SelectionFont.Style | FontStyle.Bold;
+                }
                 editorRichTextBox.SelectionFont = new Font(currentFont, newFontStyle);
             }
         }
@@ -95,5 +104,12 @@ namespace DotNotes
                 editorRichTextBox.SelectionFont = new Font(oldFontFamily, int.Parse(selectedFontSize), oldFontStyle);
             }
         }
+
+        private void cutToolStripButton_Click(object sender, EventArgs e)
+        {
+            editorRichTextBox.Cut();
+        }
+
+        // https://stackoverflow.com/questions/18966407/enable-copy-cut-past-window-in-a-rich-text-box
     }
 }

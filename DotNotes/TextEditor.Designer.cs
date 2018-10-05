@@ -313,7 +313,7 @@
             this.toolStripSeparator3});
             this.toolStrip2.Location = new System.Drawing.Point(0, 49);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(24, 401);
+            this.toolStrip2.Size = new System.Drawing.Size(32, 401);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -323,8 +323,9 @@
             this.cutToolStripButton.Image = global::DotNotes.Properties.Resources.cut;
             this.cutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cutToolStripButton.Name = "cutToolStripButton";
-            this.cutToolStripButton.Size = new System.Drawing.Size(21, 20);
+            this.cutToolStripButton.Size = new System.Drawing.Size(29, 20);
             this.cutToolStripButton.Text = "C&ut";
+            this.cutToolStripButton.Click += new System.EventHandler(this.cutToolStripButton_Click);
             // 
             // copyToolStripButton
             // 
@@ -332,7 +333,7 @@
             this.copyToolStripButton.Image = global::DotNotes.Properties.Resources.copy;
             this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copyToolStripButton.Name = "copyToolStripButton";
-            this.copyToolStripButton.Size = new System.Drawing.Size(21, 20);
+            this.copyToolStripButton.Size = new System.Drawing.Size(29, 20);
             this.copyToolStripButton.Text = "&Copy";
             // 
             // pasteToolStripButton
@@ -341,13 +342,13 @@
             this.pasteToolStripButton.Image = global::DotNotes.Properties.Resources.paste;
             this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pasteToolStripButton.Name = "pasteToolStripButton";
-            this.pasteToolStripButton.Size = new System.Drawing.Size(21, 20);
+            this.pasteToolStripButton.Size = new System.Drawing.Size(29, 20);
             this.pasteToolStripButton.Text = "&Paste";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(21, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(29, 6);
             // 
             // editorRichTextBox
             // 
