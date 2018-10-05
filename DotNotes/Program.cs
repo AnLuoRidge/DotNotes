@@ -22,12 +22,12 @@ namespace DotNotes
 
         static void LoadUsers()
         {
-            String line;
-
             try
             {
+                string line;
                 //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader("C:\\Sample.txt");
+                string dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                StreamReader sr = new StreamReader(dir + @"\login.txt");
 
                 //Read the first line of text
                 line = sr.ReadLine();
@@ -36,10 +36,26 @@ namespace DotNotes
                 while (line != null)
                 {
                     //write the lie to console window
-                    Console.WriteLine(line);
+                    //                    Console.WriteLine(line);
+                    // jimy1,asdasd,View,Jim,MacDonald,14-09-1970
+                    var userInfo = line.Split(',');
+                    var username = userInfo[0];
+                    var pwd = userInfo[1];
+                    var type = userInfo[2];
+                    var firstName = userInfo[3];
+                    var lastName = userInfo[4];
+                    var dateStr = userInfo[5];
+
+                    UserType userType = type == "Edit" ? UserType.Edit : UserType.View;
+
+                    var user = new User(username, pwd, firstName, lastName, dateStr, userType);
+                    Console.WriteLine(user.Username + user.DateOfBirth + user.Password + user.FirstName);
+                    // type enum
+                    // date convert
                     //Read the next line
                     line = sr.ReadLine();
                 }
+
 
                 //close the file
                 sr.Close();
@@ -53,6 +69,9 @@ namespace DotNotes
             {
                 Console.WriteLine("Executing finally block.");
             }
+
+            // add a line to end of file
+
         }
     }
 
