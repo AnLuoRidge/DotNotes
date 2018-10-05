@@ -110,6 +110,16 @@ namespace DotNotes
             editorRichTextBox.Cut();
         }
 
+        private void copyToolStripButton_Click(object sender, EventArgs e)
+        {
+            editorRichTextBox.Copy();
+        }
+
+        private void pasteToolStripButton_Click(object sender, EventArgs e)
+        {
+            editorRichTextBox.Paste();
+        }
+
         // https://stackoverflow.com/questions/18966407/enable-copy-cut-past-window-in-a-rich-text-box
     }
 }
