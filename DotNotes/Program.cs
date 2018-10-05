@@ -74,33 +74,4 @@ namespace DotNotes
 
         }
     }
-
-    public enum UserType
-    {
-        View,
-        Edit
-    }
-    class User
-    {
-        private string username;
-        private string hashedPassword;
-        private string password;
-        private DateTime dob;
-        private UserType type;
-
-        public string Username { get => username; set => username = value; }
-        public string HashedPassword { get => hashedPassword; set => hashedPassword = value; }
-        public string Password { get => password; set => password = value; }
-        public DateTime Dob { get => dob; set => dob = value; }
-        internal UserType Type { get => type; set => type = value; }
-
-        public User(string username, string hashedPassword, string password, DateTime dob, UserType type)
-        {
-            this.username = username ?? throw new ArgumentNullException(nameof(username));
-            this.hashedPassword = hashedPassword ?? throw new ArgumentNullException(nameof(hashedPassword));
-            this.password = password ?? throw new ArgumentNullException(nameof(password));
-            this.dob = dob;
-            this.type = type;
-        }
-    }
 }
