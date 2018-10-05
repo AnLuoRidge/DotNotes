@@ -122,11 +122,13 @@ namespace DotNotes
 
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
-            var te = new TextEditor(userType);
-            te.Location.Offset(10, 20);
+            var te = new TextEditor(userType)
+            {
+                Left = Left + 10,
+                Top = Top + 10
+            };
             te.Show();
         }
 
-        // https://stackoverflow.com/questions/18966407/enable-copy-cut-past-window-in-a-rich-text-box
     }
 }
