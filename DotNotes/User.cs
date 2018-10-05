@@ -41,12 +41,18 @@ namespace DotNotes
         public User(string username, string password, string firstName, string lastName, string dob, UserType type)
         {
             this._username = username ?? throw new ArgumentNullException(nameof(username));
-//            this.hashedPassword = hashedPassword ?? throw new ArgumentNullException(nameof(hashedPassword));
-            this._password = password ?? throw new ArgumentNullException(nameof(password));
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.DateOfBirth = dob;
+            //            this.hashedPassword = hashedPassword ?? throw new ArgumentNullException(nameof(hashedPassword));
+            _password = password ?? throw new ArgumentNullException(nameof(password));
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dob;
             this.type = type;
+        }
+
+        public string Print()
+        {
+            string userType = type == UserType.Edit ? "Edit" : "View";
+            return $"{_username},{_password},{userType},{_firstName},{_lastName},{DateOfBirth}";
         }
         
     }

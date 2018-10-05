@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,16 +35,24 @@ namespace DotNotes
         private void submitButton_Click(object sender, EventArgs e)
         {
 
-            var username = usernameTextBox.Text;
             if (Validator())
             {
-                // var user = new User();
+                var username = usernameTextBox.Text;
+                var password = passwordTextBox.Text;
+                var dateOfBirth = dateOfBirthPicker.Value.ToString(@"dd-MM-yyyy");
+                var firstName = firstNameTextBox.Text;
+                var lastName = lastNameTextBox.Text;
+                var userType = (string)userTypecomboBox.SelectedItem == "Edit" ? UserType.Edit : UserType.View;
 
+                var user = new User(username, password, firstName, lastName, dateOfBirth, userType);
+
+                // save to file
+                string dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                var sw = new StreamWriter(dir + @"\login.txt", append: true);
+                sw.WriteLine(user.Print());
+                sw.Close();
                 // transion to Login
-                var lf = new LoginForm
-                {
-                    Location = this.Location
-                };
+                var lf = new LoginForm();
 
                 this.Hide();
 
@@ -65,8 +74,6 @@ namespace DotNotes
             var dob = dateOfBirthPicker.Value;
             var type = userTypecomboBox.SelectedItem;
             
-            
-            Console.Write("afafdafdfaf");
             if (password1 != passwordTextBox2.Text)
             {
                 MessageBox.Show("Two passwords don't match!");

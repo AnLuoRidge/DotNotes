@@ -20,7 +20,11 @@ namespace DotNotes
             InitializeComponent();
             this.CenterToScreen();
             this.userType = type;
+#if DEBUG
             editorRichTextBox.Text = "test new style";
+#endif
+            // set the default font size
+            editorRichTextBox.Font = new Font(editorRichTextBox.SelectionFont.FontFamily, 14);
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
