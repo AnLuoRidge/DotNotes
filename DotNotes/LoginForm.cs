@@ -21,13 +21,11 @@ namespace DotNotes
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(usernameTextBox.Text);
-            Console.WriteLine(passwordTextBox.Text);
             // transion to Editor
             // UserType type 
             var te = new TextEditor(UserType.Edit);
 
-            this.Hide();
+            Hide();
             
             te.Show();
         }
