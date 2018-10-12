@@ -13,11 +13,12 @@ namespace DotNotes
 {
     public partial class SignUpForm : Form
     {
-        public SignUpForm()
+        private string[] _usernames;
+        public SignUpForm(string[] usernames)
         {
             InitializeComponent();
             this.CenterToScreen();
-
+            _usernames = usernames;
             userTypecomboBox.SelectedIndex = 0;
         }
 
@@ -88,6 +89,16 @@ namespace DotNotes
             if (password1 != passwordTextBox2.Text)
             {
                 MessageBox.Show("Two passwords don't match!");
+                return false;
+            }
+            if (_usernames.Contains(username))
+            {
+                MessageBox.Show("The username is already existed");
+                return false;
+            }
+            if (username.Contains(" "))
+            {
+                MessageBox.Show("Space is not allowed in username");
                 return false;
             }
 

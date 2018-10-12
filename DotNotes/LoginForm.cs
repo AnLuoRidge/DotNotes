@@ -14,10 +14,12 @@ namespace DotNotes
     public partial class LoginForm : Form
     {
         private List<User> _users;
+        private List<string> _usernames = new List<string>();
+
         public LoginForm()
         {
             InitializeComponent();
-            this.CenterToScreen();
+            CenterToScreen();
             _users = LoadUsers();
         }
 
@@ -27,19 +29,15 @@ namespace DotNotes
             try
             {
                 string line;
-                //Pass the file path and file name to the StreamReader constructor
                 string dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                 StreamReader sr = new StreamReader(dir + @"\login.txt");
 
-                //Read the first line of text
+                // Read the first line of text
                 line = sr.ReadLine();
 
-                //Continue to read until you reach end of file
+                // Continue to read until reach end of file
                 while (line != null)
                 {
-                    //write the lie to console window
-                    //                    Console.WriteLine(line);
-                    // jimy1,asdasd,View,Jim,MacDonald,14-09-1970
                     var userInfo = line.Split(',');
                     var username = userInfo[0];
                     var pwd = userInfo[1];
@@ -52,14 +50,10 @@ namespace DotNotes
 
                     var user = new User(username, pwd, firstName, lastName, dateStr, userType);
                     users.Add(user);
-                    // type enum
-                    // date convert
-                    //Read the next line
+                    // Read the next line
                     line = sr.ReadLine();
                 }
 
-
-                //close the file
                 sr.Close();
                 return users;
             }
@@ -68,19 +62,11 @@ namespace DotNotes
                 Console.WriteLine("Exception: " + e.Message);
                 return users;
             }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }
-
-            // add a line to end of file
-
         }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
             // transion to Editor
-            // UserType type 
             var username = usernameTextBox.Text;
             var password = passwordTextBox.Text;
 
@@ -104,8 +90,12 @@ namespace DotNotes
 
         private void newUserButton_Click(object sender, EventArgs e)
         {
+            foreach (var user in _users)
+            {
+                _usernames.Add(user.Username);
+            }
             // transion to Sign up
-            var su = new SignUpForm();
+            var su = new SignUpForm(_usernames.ToArray());
 
             this.Hide();
 

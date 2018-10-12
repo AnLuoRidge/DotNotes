@@ -6,22 +6,24 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DotNotes
 {
     public partial class TextEditor : Form
     {
-        private UserType userType;
+        private UserType _userType;
+        private string _pathName = "";
 
         public TextEditor(UserType type)
         {
             InitializeComponent();
             this.CenterToScreen();
-            this.userType = type;
+            _userType = type;
+            editorRichTextBox.ReadOnly = _userType != UserType.Edit;
+
 #if DEBUG
-            editorRichTextBox.Text = "test new style";
+            editorRichTextBox.Text = "This line of text is only showed in DEBUG mode for testing.";
 #endif
             // set the default font size
             editorRichTextBox.Font = new Font(editorRichTextBox.SelectionFont.FontFamily, 14);
@@ -48,13 +50,11 @@ namespace DotNotes
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // transion to About
-            var about = new About
+            var about = new AboutBox
             {
                 Location = this.Location
             };
 
-            this.Hide();
-            // TODO: make it as a modal
             about.Show();
         }
 
@@ -132,7 +132,7 @@ namespace DotNotes
 
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
-            var te = new TextEditor(userType)
+            var te = new TextEditor(_userType)
             {
                 Left = Left + 10,
                 Top = Top + 10
@@ -140,5 +140,60 @@ namespace DotNotes
             te.Show();
         }
 
+        private void openFileStripButton_Click(object sender, EventArgs e)
+        {
+            string ext = Path.GetExtension(openFileDialog.FileName);
+            if
+(openFileDialog.ShowDialog() ==
+DialogResult.OK &&
+      openFileDialog.FileName.Length > 0)
+            {
+//                if (ext == "txt")
+//                {
+//                    editorRichTextBox.LoadFile(_pathName,
+//RichTextBoxStreamType
+//.PlainText);
+//                }
+//                else
+if (ext == "rtf")
+                {
+                    editorRichTextBox.LoadFile(_pathName,
+RichTextBoxStreamType
+.RichText);
+                }
+            }
+            _pathName = openFileDialog.FileName;
+        }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (_pathName != "")
+            {
+                editorRichTextBox.SaveFile(_pathName,
+RichTextBoxStreamType
+.RichText);
+            } else
+            {
+                saveAsToolStripButton_Click(sender, e);
+            }
+        }
+
+        private void saveAsToolStripButton_Click(object sender, EventArgs e)
+        {
+            if
+(saveFileDialog.ShowDialog() ==
+DialogResult.OK &&
+saveFileDialog.FileName.Length > 0)
+            {
+                editorRichTextBox.SaveFile(saveFileDialog.FileName,
+                RichTextBoxStreamType
+                .RichText);
+            }
+        }
+
+        private void aboutToolStripButton_Click(object sender, EventArgs e)
+        {
+            aboutToolStripMenuItem_Click(sender, e);
+        }
     }
 }
