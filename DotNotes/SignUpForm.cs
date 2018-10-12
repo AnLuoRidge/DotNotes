@@ -18,8 +18,7 @@ namespace DotNotes
             InitializeComponent();
             this.CenterToScreen();
 
-            // userTypecomboBox.Items.Add("View");
-            // userTypecomboBox.Items.Add("Edit");
+            userTypecomboBox.SelectedIndex = 0;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -54,7 +53,7 @@ namespace DotNotes
                 // transion to Login
                 var lf = new LoginForm();
 
-                this.Hide();
+                Hide();
 
                 lf.Show();
             }
@@ -71,14 +70,27 @@ namespace DotNotes
             var password2 = passwordTextBox2.Text;
             var firstName = firstNameTextBox.Text;
             var lastName = lastNameTextBox.Text;
-            var dob = dateOfBirthPicker.Value;
+            var dob = dateOfBirthPicker.Value.ToString();
             var type = userTypecomboBox.SelectedItem;
-            
+
+            // Check all the fields are filled.
+            if (username == "" ||
+                password1 == "" ||
+                password2 == "" ||
+                firstName == "" ||
+                lastName == "" ||
+                dob == ""
+                )
+            {
+                MessageBox.Show("All the fields are required!");
+                return false;
+            }
             if (password1 != passwordTextBox2.Text)
             {
                 MessageBox.Show("Two passwords don't match!");
                 return false;
             }
+
             return true;
         }
 
@@ -90,7 +102,7 @@ namespace DotNotes
                 Location = this.Location
             };
 
-            this.Hide();
+            Hide();
 
             lf.Show();
         }
