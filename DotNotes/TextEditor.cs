@@ -21,6 +21,7 @@ namespace DotNotes
             InitializeComponent();
             this.CenterToScreen();
             _userType = type;
+            editorRichTextBox.HideSelection = false;
             editorRichTextBox.ReadOnly = _userType != UserType.Edit;
 
 #if DEBUG
@@ -169,6 +170,7 @@ namespace DotNotes
                 editorRichTextBox.SaveFile(saveFileDialog.FileName,
                 RichTextBoxStreamType
                 .RichText);
+                _pathName = saveFileDialog.FileName;
             }
         }
 
