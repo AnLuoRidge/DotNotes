@@ -45,11 +45,6 @@ namespace DotNotes
             lf.Show();
         }
 
-        private void open()
-        {
- 
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // transion to About
@@ -110,7 +105,7 @@ namespace DotNotes
         {
             var oldFontFamily = editorRichTextBox.SelectionFont.FontFamily;
             var oldFontStyle = editorRichTextBox.SelectionFont.Style;
-            var selectedFontSize = (string) fontSizeToolStripComboBox.SelectedItem;
+            var selectedFontSize = (string)fontSizeToolStripComboBox.SelectedItem;
 
             if (selectedFontSize != "")
             {
@@ -146,36 +141,21 @@ namespace DotNotes
         private void openFileStripButton_Click(object sender, EventArgs e)
         {
             string ext = Path.GetExtension(openFileDialog.FileName);
-            if
-(openFileDialog.ShowDialog() ==
-DialogResult.OK &&
-      openFileDialog.FileName.Length > 0)
+            var openWithValidFileName = openFileDialog.ShowDialog() == DialogResult.OK && openFileDialog.FileName.Length > 0;
+            if (openWithValidFileName)
             {
-//                if (ext == "txt")
-//                {
-//                    editorRichTextBox.LoadFile(_pathName,
-//RichTextBoxStreamType
-//.PlainText);
-//                }
-//                else
-if (ext == "rtf")
-                {
-                    editorRichTextBox.LoadFile(_pathName,
-RichTextBoxStreamType
-.RichText);
-                }
+                _pathName = openFileDialog.FileName;
+                editorRichTextBox.LoadFile(_pathName, RichTextBoxStreamType.RichText);
             }
-            _pathName = openFileDialog.FileName;
         }
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
             if (_pathName != "")
             {
-                editorRichTextBox.SaveFile(_pathName,
-RichTextBoxStreamType
-.RichText);
-            } else
+                editorRichTextBox.SaveFile(_pathName, RichTextBoxStreamType.RichText);
+            }
+            else
             {
                 saveAsToolStripButton_Click(sender, e);
             }
@@ -183,10 +163,8 @@ RichTextBoxStreamType
 
         private void saveAsToolStripButton_Click(object sender, EventArgs e)
         {
-            if
-(saveFileDialog.ShowDialog() ==
-DialogResult.OK &&
-saveFileDialog.FileName.Length > 0)
+            var saveWithValidFileName = saveFileDialog.ShowDialog() == DialogResult.OK && saveFileDialog.FileName.Length > 0;
+            if (saveWithValidFileName)
             {
                 editorRichTextBox.SaveFile(saveFileDialog.FileName,
                 RichTextBoxStreamType
@@ -197,6 +175,41 @@ saveFileDialog.FileName.Length > 0)
         private void aboutToolStripButton_Click(object sender, EventArgs e)
         {
             aboutToolStripMenuItem_Click(sender, e);
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            newToolStripButton_Click(sender, e);
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileStripButton_Click(sender, e);
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveToolStripButton_Click(sender, e);
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveAsToolStripButton_Click(sender, e);
+        }
+
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cutToolStripButton_Click(sender, e);
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            copyToolStripButton_Click(sender, e);
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pasteToolStripButton_Click(sender, e);
         }
     }
 }

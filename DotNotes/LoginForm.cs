@@ -21,6 +21,9 @@ namespace DotNotes
             InitializeComponent();
             CenterToScreen();
             _users = LoadUsers();
+
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(this.Enter_Push);
         }
 
         static List<User> LoadUsers()
@@ -86,6 +89,15 @@ namespace DotNotes
                 MessageBox.Show("Failed. Please try again.");
             }
 
+        }
+
+        private void Enter_Push(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                loginButton_Click(sender, e);
+                e.SuppressKeyPress = true;
+            }
         }
 
         private void newUserButton_Click(object sender, EventArgs e)
