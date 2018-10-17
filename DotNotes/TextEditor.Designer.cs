@@ -54,7 +54,7 @@
             this.fontSizeToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.usernameToolStripLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -194,7 +194,7 @@
             this.fontSizeToolStripComboBox,
             this.toolStripSeparator2,
             this.aboutToolStripButton,
-            this.toolStripLabel1});
+            this.usernameToolStripLabel});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 25);
@@ -316,11 +316,11 @@
             this.aboutToolStripButton.ToolTipText = "About";
             this.aboutToolStripButton.Click += new System.EventHandler(this.aboutToolStripButton_Click);
             // 
-            // toolStripLabel1
+            // usernameToolStripLabel
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(59, 22);
-            this.toolStripLabel1.Text = "username";
+            this.usernameToolStripLabel.Name = "usernameToolStripLabel";
+            this.usernameToolStripLabel.Size = new System.Drawing.Size(59, 22);
+            this.usernameToolStripLabel.Text = "username";
             // 
             // toolStrip2
             // 
@@ -434,7 +434,7 @@
         private System.Windows.Forms.ToolStripButton underlineToolStripButton;
         private System.Windows.Forms.ToolStripComboBox fontSizeToolStripComboBox;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripLabel usernameToolStripLabel;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton cutToolStripButton;
         private System.Windows.Forms.ToolStripButton copyToolStripButton;

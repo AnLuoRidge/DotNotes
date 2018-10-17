@@ -75,7 +75,7 @@ namespace DotNotes
             {
                 authorisedUser = _users.Single(s => s.Username == username && s.Password == password);
 
-                var te = new TextEditor(authorisedUser.Type);
+                var te = new TextEditor(authorisedUser.Username, authorisedUser.Type);
 
                 Hide();
 

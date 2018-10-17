@@ -13,9 +13,10 @@ namespace DotNotes
     public partial class TextEditor : Form
     {
         private UserType _userType;
+        private string _username;
         private string _pathName = "";
 
-        public TextEditor(UserType type)
+        public TextEditor(string username, UserType type)
         {
             InitializeComponent();
             this.CenterToScreen();
@@ -23,10 +24,12 @@ namespace DotNotes
             editorRichTextBox.ReadOnly = _userType != UserType.Edit;
 
 #if DEBUG
-            editorRichTextBox.Text = "This line of text is only showed in DEBUG mode for testing.";
+            editorRichTextBox.Text = "These text is only showed in DEBUG mode for testing.";
 #endif
             // set the default font size
             editorRichTextBox.Font = new Font(editorRichTextBox.SelectionFont.FontFamily, 14);
+            _username = username;
+            usernameToolStripLabel.Text = "User: " + _username;
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -132,7 +135,7 @@ namespace DotNotes
 
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
-            var te = new TextEditor(_userType)
+            var te = new TextEditor(_username, _userType)
             {
                 Left = Left + 10,
                 Top = Top + 10
