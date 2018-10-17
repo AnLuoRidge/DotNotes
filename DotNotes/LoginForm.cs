@@ -1,12 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DotNotes
@@ -14,16 +9,16 @@ namespace DotNotes
     public partial class LoginForm : Form
     {
         private List<User> _users;
-        private List<string> _usernames = new List<string>();
+        private static List<string> _usernames = new List<string>();
 
         public LoginForm()
         {
             InitializeComponent();
             CenterToScreen();
             _users = LoadUsers();
-
-            this.KeyPreview = true;
-            this.KeyDown += new KeyEventHandler(this.Enter_Push);
+            // Enable Enter key to login
+            KeyPreview = true;
+            KeyDown += new KeyEventHandler(Enter_Push);
         }
 
         static List<User> LoadUsers()
@@ -37,7 +32,6 @@ namespace DotNotes
 
                 // Read the first line of text
                 line = sr.ReadLine();
-
                 // Continue to read until reach end of file
                 while (line != null)
                 {
@@ -53,6 +47,8 @@ namespace DotNotes
 
                     var user = new User(username, pwd, firstName, lastName, dateStr, userType);
                     users.Add(user);
+                    // record all the usernames
+                    _usernames.Add(user.Username);
                     // Read the next line
                     line = sr.ReadLine();
                 }
@@ -69,11 +65,18 @@ namespace DotNotes
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            // transion to Editor
+            // try transiting to Editor
             var username = usernameTextBox.Text;
             var password = passwordTextBox.Text;
-
             User authorisedUser;
+
+            if (!Validator.RequireUsername(username))
+                return;
+            if (!Validator.RequirePassword(password))
+                return;
+            if (!Validator.UsernameExisted(username, _usernames.ToArray()))
+                return;
+
             try
             {
                 authorisedUser = _users.Single(s => s.Username == username && s.Password == password);
@@ -86,7 +89,7 @@ namespace DotNotes
             }
             catch (Exception)
             {
-                MessageBox.Show("Failed. Please try again.");
+                MessageBox.Show(Validator.wrongPasswordError);
             }
 
         }
@@ -102,16 +105,10 @@ namespace DotNotes
 
         private void newUserButton_Click(object sender, EventArgs e)
         {
-            foreach (var user in _users)
-            {
-                _usernames.Add(user.Username);
-            }
             // transion to Sign up
-            var su = new SignUpForm(_usernames.ToArray());
-
-            this.Hide();
-
-            su.Show();
+            var signUpForm = new SignUpForm(_usernames.ToArray());
+            Hide();
+            signUpForm.Show();
         }
 
         private void exitButton_Click(object sender, EventArgs e)

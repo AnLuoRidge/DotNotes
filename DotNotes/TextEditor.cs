@@ -16,13 +16,11 @@ namespace DotNotes
             InitializeComponent();
             this.CenterToScreen();
             _userType = type;
+            // set 12 as the default font size
+            fontSizeToolStripComboBox.SelectedIndex = 4;
             // Prevent focus lost when change the font size
             editorRichTextBox.HideSelection = false;
             editorRichTextBox.ReadOnly = _userType != UserType.Edit;
-
-#if DEBUG
-            editorRichTextBox.Text = "This line is only showed in DEBUG mode for testing.";
-#endif
             // set the default font size
             editorRichTextBox.Font = new Font(editorRichTextBox.SelectionFont.FontFamily, 14);
             _username = username;
@@ -33,17 +31,11 @@ namespace DotNotes
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // open Login form
-            var lf = new LoginForm
+            var loginForm = new LoginForm
             {
                 Location = this.Location
             };
-            // close all the opened editors
-            lf.Show();
-            foreach (Form f in Application.OpenForms)
-            {
-                if (f.Name != "LoginForm")
-                    f.Close();
-            }
+            loginForm.Show();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -53,7 +45,6 @@ namespace DotNotes
             {
                 Location = this.Location
             };
-
             about.Show();
         }
 
@@ -63,15 +54,8 @@ namespace DotNotes
             {
                 Font currentFont = editorRichTextBox.SelectionFont;
                 FontStyle newFontStyle;
-
-                if (editorRichTextBox.SelectionFont.Bold == true)
-                {
-                    newFontStyle = (~FontStyle.Bold) & editorRichTextBox.SelectionFont.Style;
-                }
-                else
-                {
-                    newFontStyle = editorRichTextBox.SelectionFont.Style | FontStyle.Bold;
-                }
+                // use Binary XOR Operator to apply bold
+                newFontStyle = editorRichTextBox.SelectionFont.Style ^ FontStyle.Bold;
                 editorRichTextBox.SelectionFont = new Font(currentFont, newFontStyle);
             }
         }
@@ -101,7 +85,6 @@ namespace DotNotes
             }
         }
 
-        // this should be selectedItem changed NOT comboBox clicked
         private void fontSizeToolStripComboBox_Click(object sender, EventArgs e)
         {
             var oldFontFamily = editorRichTextBox.SelectionFont.FontFamily;
@@ -133,6 +116,7 @@ namespace DotNotes
         {
             var te = new TextEditor(_username, _userType)
             {
+                // move the new window a bit
                 Left = Left + 10,
                 Top = Top + 10
             };

@@ -50,14 +50,13 @@ namespace DotNotes
             var lastName = lastNameTextBox.Text;
             var dob = dateOfBirthPicker.Value.ToString();
 
-            if (!Validator.Required(username, password1, password2, firstName, lastName, dob))
+            if (!Validator.RequiredAll(username, password1, password2, firstName, lastName, dob))
                 return false;
-            // Check duplicate usenames
-            if (!Validator.UsernameExisted(username, _usernames))
+            if (!Validator.UsernameDuplicate(username, _usernames))
                 return false;
             if (!Validator.PasswordMatch(password1, password2))
                 return false;
-            if (!Validator.PasswordLength(password1, 6, 20))
+            if (!Validator.PasswordLengthLimit(password1, 6, 20))
                 return false;
             return true;
         }

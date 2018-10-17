@@ -10,7 +10,6 @@ namespace DotNotes
     
     public class User
     {
-
         private string _username;
         private string _password;
         private string _firstName;
@@ -38,7 +37,7 @@ namespace DotNotes
 
         public User(string username, string password, string firstName, string lastName, string dob, UserType type)
         {
-            this._username = username ?? throw new ArgumentNullException(nameof(username));
+            _username = username ?? throw new ArgumentNullException(nameof(username));
             _password = password ?? throw new ArgumentNullException(nameof(password));
             FirstName = firstName;
             LastName = lastName;
@@ -51,6 +50,5 @@ namespace DotNotes
             string userType = type == UserType.Edit ? "Edit" : "View";
             return $"{_username},{_password},{userType},{_firstName},{_lastName},{DateOfBirth}";
         }
-        
     }
 }

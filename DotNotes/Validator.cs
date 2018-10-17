@@ -1,43 +1,67 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DotNotes
 {
     public static class Validator
     {
-        public static Boolean Required(string username, string password1, string password2, string firstName, string lastName, string dataOfBirth)
+        private static string usernameNotExistedError = "The username is not found.";
+        private static string usernameMissingError = "Please fill in the username";
+        private static string passwordMissingError = "Please fill in the password";
+        private static string reEnterpasswordMissingError = "Please re-enter your password";
+        private static string firstNameMissingError = "Please fill your first name";
+        private static string lastNameMissingError = "Please fill your last name";
+        private static string dateOfBirthMissingError = "Please fill in your date of birth";
+        public static string wrongPasswordError = "The password is wrong. Please try again.";
+
+        public static Boolean RequiredAll(string username, string password1, string password2, string firstName, string lastName, string dataOfBirth)
         {
-            if (username == "")
-            {
-                MessageBox.Show("Please fill in the username");
+            if(!RequireUsername(username))
                 return false;
-            }
             if (password1 == "")
             {
-                MessageBox.Show("Please fill in the password");
+                MessageBox.Show(passwordMissingError);
                 return false;
             }
             if (password2 == "")
             {
-                MessageBox.Show("Please re-enter your password");
+                MessageBox.Show(reEnterpasswordMissingError);
                 return false;
             }
             if (firstName == "")
             {
-                MessageBox.Show("Please fill your first name");
+                MessageBox.Show(firstNameMissingError);
                 return false;
             }
             if (lastName == "")
             {
-                MessageBox.Show("Please fill your last name");
+                MessageBox.Show(lastNameMissingError);
                 return false;
             }
             if (dataOfBirth == "")
             {
-                MessageBox.Show("Please fill in your date of birth");
+                MessageBox.Show(dateOfBirthMissingError);
+                return false;
+            }
+            return true;
+        }
+
+        public static Boolean RequireUsername(string username)
+        {
+            if (username == "")
+            {
+                MessageBox.Show(usernameMissingError);
+                return false;
+            }
+            return true;
+        }
+
+        public static Boolean RequirePassword(string password)
+        {
+            if (password == "")
+            {
+                MessageBox.Show(passwordMissingError);
                 return false;
             }
             return true;
@@ -52,7 +76,8 @@ namespace DotNotes
             }
             return true;
         }
-        public static Boolean PasswordLength(string password, int min, int max)
+
+        public static Boolean PasswordLengthLimit(string password, int min, int max)
         {
             if (password.Length < min)
             {
@@ -66,11 +91,22 @@ namespace DotNotes
             }
             return true;
         }
-        public static Boolean UsernameExisted(string username, string[] usernames)
+
+        public static Boolean UsernameDuplicate(string username, string[] usernames)
         {
             if (usernames.Contains(username))
             {
                 MessageBox.Show("The username is already existed");
+                return false;
+            }
+            return true;
+        }
+
+        public static Boolean UsernameExisted(string username, string[] usernames)
+        {
+            if (!usernames.Contains(username))
+            {
+                MessageBox.Show(usernameNotExistedError);
                 return false;
             }
             return true;
