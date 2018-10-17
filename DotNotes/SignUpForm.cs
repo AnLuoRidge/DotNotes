@@ -1,12 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DotNotes
@@ -18,14 +12,15 @@ namespace DotNotes
         {
             InitializeComponent();
             this.CenterToScreen();
+            // get all the usernames for duplicate checking
             _usernames = usernames;
+            // set View as default user type
             userTypecomboBox.SelectedIndex = 0;
         }
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-
-            if (Validator())
+            if (formDataValid())
             {
                 var username = usernameTextBox.Text;
                 var password = passwordTextBox.Text;
@@ -36,87 +31,54 @@ namespace DotNotes
 
                 var user = new User(username, password, firstName, lastName, dateOfBirth, userType);
 
-                // save to file
+                // save to the account file
                 string dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                 var sw = new StreamWriter(dir + @"\login.txt", append: true);
                 sw.WriteLine(user.Print());
                 sw.Close();
-                // transion to Login
-                var lf = new LoginForm();
 
-                Hide();
-
-                lf.Show();
+                transitionToLogin();
             }
         }
 
-        private bool Validator()
+        private bool formDataValid()
         {
-            // check all filled
-            // check length
-            // error hint
-            // check password match
             var username = usernameTextBox.Text;
             var password1 = passwordTextBox.Text;
             var password2 = passwordTextBox2.Text;
             var firstName = firstNameTextBox.Text;
             var lastName = lastNameTextBox.Text;
             var dob = dateOfBirthPicker.Value.ToString();
-            var type = userTypecomboBox.SelectedItem;
 
-            // Check all the fields are filled.
-            if (username == "" ||
-                password1 == "" ||
-                password2 == "" ||
-                firstName == "" ||
-                lastName == "" ||
-                dob == ""
-                )
-            {
-                MessageBox.Show("All the fields are required!");
+            if (!Validator.Required(username, password1, password2, firstName, lastName, dob))
                 return false;
-            }
-            if (password1 != passwordTextBox2.Text)
-            {
-                MessageBox.Show("Two passwords don't match!");
+            // Check duplicate usenames
+            if (!Validator.UsernameExisted(username, _usernames))
                 return false;
-            }
-            if (_usernames.Contains(username))
-            {
-                MessageBox.Show("The username is already existed");
+            if (!Validator.PasswordMatch(password1, password2))
                 return false;
-            }
-            if (username.Contains(" "))
-            {
-                MessageBox.Show("Space is not allowed in username");
+            if (!Validator.PasswordLength(password1, 6, 20))
                 return false;
-            }
-
             return true;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            // transion to Login
-            var lf = new LoginForm
-            {
-                Location = this.Location
-            };
-
-            Hide();
-
-            lf.Show();
+            transitionToLogin();
         }
 
         private void SignUpForm_Closed(object sender, EventArgs e)
         {
-            // transion to Login
-            var lf = new LoginForm
+            transitionToLogin();
+        }
+        private void transitionToLogin()
+        {
+            var loginForm = new LoginForm
             {
                 Location = this.Location
             };
-
-            lf.Show();
+            Hide();
+            loginForm.Show();
         }
     }
 }

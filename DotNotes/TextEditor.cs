@@ -32,15 +32,18 @@ namespace DotNotes
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // transion to Login
+            // open Login form
             var lf = new LoginForm
             {
                 Location = this.Location
             };
-
-            this.Hide();
-
+            // close all the opened editors
             lf.Show();
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Name != "LoginForm")
+                    f.Close();
+            }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

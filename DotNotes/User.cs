@@ -12,7 +12,6 @@ namespace DotNotes
     {
 
         private string _username;
-//        private string hashedPassword;
         private string _password;
         private string _firstName;
         private string _lastName;
@@ -32,7 +31,6 @@ namespace DotNotes
         private UserType type;
 
         public string Username { get => _username; set => _username = value; }
-//        public string HashedPassword { get => hashedPassword; set => hashedPassword = value; }
         public string Password { get => _password; set => _password = value; }
         public string DateOfBirth { get; set; }
 
@@ -41,7 +39,6 @@ namespace DotNotes
         public User(string username, string password, string firstName, string lastName, string dob, UserType type)
         {
             this._username = username ?? throw new ArgumentNullException(nameof(username));
-            //            this.hashedPassword = hashedPassword ?? throw new ArgumentNullException(nameof(hashedPassword));
             _password = password ?? throw new ArgumentNullException(nameof(password));
             FirstName = firstName;
             LastName = lastName;
