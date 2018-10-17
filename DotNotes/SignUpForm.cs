@@ -22,16 +22,6 @@ namespace DotNotes
             userTypecomboBox.SelectedIndex = 0;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SignUpForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void submitButton_Click(object sender, EventArgs e)
         {
 
@@ -114,6 +104,17 @@ namespace DotNotes
             };
 
             Hide();
+
+            lf.Show();
+        }
+
+        private void SignUpForm_Closed(object sender, EventArgs e)
+        {
+            // transion to Login
+            var lf = new LoginForm
+            {
+                Location = this.Location
+            };
 
             lf.Show();
         }

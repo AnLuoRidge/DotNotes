@@ -1,11 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DotNotes
@@ -21,15 +16,17 @@ namespace DotNotes
             InitializeComponent();
             this.CenterToScreen();
             _userType = type;
+            // Prevent focus lost when change the font size
             editorRichTextBox.HideSelection = false;
             editorRichTextBox.ReadOnly = _userType != UserType.Edit;
 
 #if DEBUG
-            editorRichTextBox.Text = "These text is only showed in DEBUG mode for testing.";
+            editorRichTextBox.Text = "This line is only showed in DEBUG mode for testing.";
 #endif
             // set the default font size
             editorRichTextBox.Font = new Font(editorRichTextBox.SelectionFont.FontFamily, 14);
             _username = username;
+            // set the username shown on the toolbar
             usernameToolStripLabel.Text = "User: " + _username;
         }
 
@@ -61,8 +58,8 @@ namespace DotNotes
         {
             if (editorRichTextBox.SelectionFont != null)
             {
-                System.Drawing.Font currentFont = editorRichTextBox.SelectionFont;
-                System.Drawing.FontStyle newFontStyle;
+                Font currentFont = editorRichTextBox.SelectionFont;
+                FontStyle newFontStyle;
 
                 if (editorRichTextBox.SelectionFont.Bold == true)
                 {
@@ -80,8 +77,8 @@ namespace DotNotes
         {
             if (editorRichTextBox.SelectionFont != null)
             {
-                System.Drawing.Font currentFont = editorRichTextBox.SelectionFont;
-                System.Drawing.FontStyle newFontStyle;
+                Font currentFont = editorRichTextBox.SelectionFont;
+                FontStyle newFontStyle;
 
                 newFontStyle = editorRichTextBox.SelectionFont.Style ^ FontStyle.Italic;
                 editorRichTextBox.SelectionFont = new Font(currentFont, newFontStyle);
@@ -92,8 +89,8 @@ namespace DotNotes
         {
             if (editorRichTextBox.SelectionFont != null)
             {
-                System.Drawing.Font currentFont = editorRichTextBox.SelectionFont;
-                System.Drawing.FontStyle newFontStyle;
+                Font currentFont = editorRichTextBox.SelectionFont;
+                FontStyle newFontStyle;
 
                 newFontStyle = editorRichTextBox.SelectionFont.Style ^ FontStyle.Underline;
 

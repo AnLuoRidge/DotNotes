@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SignUpForm_Closed);
             this.label1 = new System.Windows.Forms.Label();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
@@ -58,7 +59,6 @@
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // usernameTextBox
             // 
@@ -237,7 +237,6 @@
             this.Controls.Add(this.label7);
             this.Name = "SignUpForm";
             this.Text = "Sign Up";
-            this.Load += new System.EventHandler(this.SignUpForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.accountGroupBox.ResumeLayout(false);
